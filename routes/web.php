@@ -7,6 +7,11 @@ Route::get('/', function () {
 });
 
 Route::get('/.well-known/assetlinks.json', function () {
+
+    if (app()->bound('octane')) {
+        app()->forgetInstance('octane');
+    }
+
     return response()->json([
         [
             "relation" => ["delegate_permission/common.handle_all_urls"],
